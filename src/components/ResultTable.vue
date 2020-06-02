@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row>
         <v-col cols="12" sm="3">
-          <v-select v-model="queryLanguage" :items="languages" label="Query Language" solo></v-select>
+          <v-select v-model="queryLanguage" :items="languages" label="Query Language"></v-select>
         </v-col>
         <v-col cols="12" sm="6">
           <v-select
@@ -11,7 +11,6 @@
             :items="languages.filter(lan=>lan!=queryLanguage)"
             label="Result Language"
             multiple
-            solo
           ></v-select>
         </v-col>
         <v-col cols="12" sm="3">
@@ -118,7 +117,7 @@ export default {
             query_string: this.queryString,
             result_languages: this.resultLanguages,
             bdats: this.bdats,
-            table: this.tables,
+            tables: this.tables,
             limit: this.limit
           }
         );
