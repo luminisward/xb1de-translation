@@ -1,46 +1,47 @@
 <template>
   <v-card class="result-table">
     <v-container fluid>
-      <v-row>
-        <v-col cols="12" sm="3">
-          <v-select v-model="queryLanguage" :items="languages" label="Query Language"></v-select>
-        </v-col>
-        <v-col cols="12" sm="6">
-          <v-select
-            v-model="resultLanguages"
-            :items="languages.filter(lan=>lan!=queryLanguage)"
-            label="Result Language"
-            multiple
-          ></v-select>
-        </v-col>
-        <v-col cols="12" sm="3">
-          <v-text-field v-model.number="limit" label="Limit" type="number"></v-text-field>
-        </v-col>
-      </v-row>
+      <form @submit.prevent="query">
+        <v-row>
+          <v-col cols="12" sm="3">
+            <v-select v-model="queryLanguage" :items="languages" label="Query Language"></v-select>
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-select
+              v-model="resultLanguages"
+              :items="languages.filter(lan=>lan!=queryLanguage)"
+              label="Result Language"
+              multiple
+            ></v-select>
+          </v-col>
+          <v-col cols="12" sm="3">
+            <v-text-field v-model.number="limit" label="Limit" type="number"></v-text-field>
+          </v-col>
+        </v-row>
 
-      <v-row>
-        <v-col cols="12" sm="6">
-          <v-combobox v-model="bdats" label="Bdat" multiple clearable chips></v-combobox>
-        </v-col>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-combobox v-model="bdats" label="Bdat" multiple clearable chips></v-combobox>
+          </v-col>
 
-        <v-col cols="12" sm="6">
-          <v-combobox v-model="tables" label="Table" multiple clearable chips></v-combobox>
-        </v-col>
-      </v-row>
+          <v-col cols="12" sm="6">
+            <v-combobox v-model="tables" label="Table" multiple clearable chips></v-combobox>
+          </v-col>
+        </v-row>
 
-      <v-row>
-        <v-col>
-          <v-text-field v-model="queryString" label="Search Text" counter outlined></v-text-field>
-        </v-col>
-      </v-row>
+        <v-row>
+          <v-col>
+            <v-text-field v-model="queryString" label="Search Text" counter outlined></v-text-field>
+          </v-col>
+        </v-row>
 
-      <v-row>
-        <v-col>
-          <v-btn color="primary" @click="query">Search</v-btn>
-        </v-col>
-      </v-row>
-      <v-spacer></v-spacer>
-
+        <v-row>
+          <v-col>
+            <v-btn color="primary" type="submit">Search</v-btn>
+          </v-col>
+        </v-row>
+        <v-spacer></v-spacer>
+      </form>
       <v-data-table :headers="headers" :items="tableDataWithKey" item-key="key" :loading="loading"></v-data-table>
     </v-container>
 
